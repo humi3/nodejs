@@ -1,0 +1,8 @@
+# node_mode_modulesは含めない
+node/app/node_modules
+
+# コンパイルしたソースもいらない
+dist/*
+
+# dbのデータも含めない
+db/data/*
