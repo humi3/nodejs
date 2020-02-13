@@ -13,6 +13,7 @@ console.dir(user1.id);
 console.dir(user1.name);
 
 import * as mysql from 'mysql';
+import { Connection, MysqlError } from "mysql";
 
 export interface DbConfig {
     host: string;
@@ -23,16 +24,23 @@ export interface DbConfig {
 
 const dbConfig: DbConfig = {
     host: 'mysql_host',
-    user: 'root',
-    password: 'root',
+    user: 'docker',
+    password: 'docker',
     database: 'test_database'
 }
 
 const connection = mysql.createConnection(dbConfig);
 
+connection.connect();
+
 const select: string = 'select * from test_table';
 
-const result = connection.query(select);
-connection.end();
+connection.query(select, (err: MysqlError | null, results: any) => {
+    if (err) {
+        console.dir(err);
+        return;
+    }
+    console.dir(results);
+});
 
-console.dir(result);
+connection.end();

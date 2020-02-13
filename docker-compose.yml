@@ -9,6 +9,8 @@ services:
     tty: true
     ports:
      - 8080:3000
+    networks:
+      - mynet
   db:
     image: mysql:5.7
     container_name: mysql_host
@@ -25,3 +27,9 @@ services:
     - ./db/sql:/docker-entrypoint-initdb.d
     ports:
     - 3306:3306
+    networks:
+      - mynet
+
+networks:
+  mynet:
+    driver: bridge
