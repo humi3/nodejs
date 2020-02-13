@@ -13,7 +13,6 @@ console.dir(user1.id);
 console.dir(user1.name);
 
 import * as mysql from 'mysql';
-import { Connection, MysqlError } from "mysql";
 
 export interface DbConfig {
     host: string;
@@ -35,7 +34,7 @@ connection.connect();
 
 const select: string = 'select * from test_table';
 
-connection.query(select, (err: MysqlError | null, results: any) => {
+connection.query(select, (err: mysql.Connection | null, results: any) => {
     if (err) {
         console.dir(err);
         return;
